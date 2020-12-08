@@ -1,0 +1,16 @@
+header {
+ background-color: #43BFF1;
+}
+
+header h1 {
+  color: white;
+  text-align: center;
+}
+
+header button {
+  color: white;
+}
+
+.tasks-cards {
+
+}

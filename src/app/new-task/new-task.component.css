@@ -1,0 +1,19 @@
+.new-task {
+  max-width: 300px;
+}
+
+.task-name {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.category {
+
+  width: 100%;
+}
+
+button {
+  padding: 10px;
+  margin: 30px;
+}

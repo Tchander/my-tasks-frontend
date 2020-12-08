@@ -1,0 +1,7 @@
+<section class="checkbox-section">
+    <li *ngFor="let task of tasks">
+      <mat-checkbox (click)="isCompleted(task)">
+        <div style="text-decoration: line-through"> {{ task.name }} </div>
+      </mat-checkbox>
+    </li>
+</section>
