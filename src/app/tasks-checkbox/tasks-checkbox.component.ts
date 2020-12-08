@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-// import {ThemePalette} from '@angular/material/core';
+import axios from '../../plugins/axios';
 
 export interface Task {
+  id: number;
   name: string;
-  completed: boolean;
+  isCompleted: boolean;
 }
 
 @Component({
@@ -16,8 +17,8 @@ export class TasksCheckboxComponent implements OnInit {
   selectedTask: Task
 
   tasks: Task[] = [
-    { name: '1', completed: false },
-    { name: '2', completed: false }
+    { id: 1, name: '1', isCompleted: false },
+    { id: 2, name: '2', isCompleted: false }
   ];
 
   constructor() { }
@@ -25,10 +26,14 @@ export class TasksCheckboxComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isCompleted(task: Task) {
-    //  Отправление данных на бэкэнд ( PATCH )
+  async isCompleted(task: Task) {
     this.selectedTask = task
-    this.selectedTask.completed = !this.selectedTask.completed
+    this.selectedTask.isCompleted = !this.selectedTask.isCompleted
+    const { data } =
+      await axios.patch(`/projects/1/todo/${task.id}/`,{
+        isCompleted: this.selectedTask.isCompleted
+      })
+    console.log(data)
   }
 
 }
