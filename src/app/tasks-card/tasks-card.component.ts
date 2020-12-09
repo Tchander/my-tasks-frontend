@@ -4,8 +4,7 @@ export interface Todo {
   id: number;
   text: string;
   isCompleted: boolean;
-  // project_id: bigint;
-  project_id: number
+  project_id: bigint;
 }
 
 export interface Project {

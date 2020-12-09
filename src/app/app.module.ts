@@ -13,13 +13,15 @@ import { TasksCheckboxComponent } from './tasks-checkbox/tasks-checkbox.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NewTaskDialog } from './new-task/new-task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewTaskComponent,
     TasksCardComponent,
-    TasksCheckboxComponent
+    TasksCheckboxComponent,
+    NewTaskDialog
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import axios from '../../plugins/axios';
-// import {Project} from '../tasks-card/tasks-card.component';
 
 export interface Todo {
   id: number;
   text: string;
   isCompleted: boolean;
-  // project_id: bigint;
-  project_id: number
+  project_id: bigint;
 }
 
 @Component({
@@ -35,12 +33,6 @@ export class TasksCheckboxComponent implements OnInit {
       })
     const index = this.todos.findIndex(t => t.id === data.id)
     this.todos.splice(index, 1, data)
-
-    // const index = this.todos.findIndex(t => t.id === todo.id)
-    // this.todos.splice(index, 1, todo)
-    // const index = this.todos.findIndex(t => t.id === this.selectedTask.id)
-    // this.todos.splice(index, 1, this.selectedTask)
-    console.log(this.todos, data.isCompleted)
   }
 
 }

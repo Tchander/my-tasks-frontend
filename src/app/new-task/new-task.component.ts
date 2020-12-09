@@ -1,14 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
-
-
-export interface Category {
-  title: string;
-}
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-new-task',
@@ -17,37 +11,42 @@ export interface Category {
 })
 export class NewTaskComponent implements OnInit {
   myControl = new FormControl();
-  options: Category[] = [
-    {title: 'Семья'},
-    {title: 'Работа'},
-    {title: 'Прочее'}
-  ];
-  filteredOptions: Observable<Category[]>;
+  @Input() titles: string[];
+  filteredOptions: Observable<string[]>;
 
-  // constructor(
-  //   public dialogRef: MatDialogRef<NewTaskComponent>
-  // ) {}
+  constructor() {}
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.title),
-        map(title => title ? this._filter(title) : this.options.slice())
+        map(title => title ? this._filter(title) : this.titles.slice())
       );
   }
 
-  displayFn(category: Category): string {
-    return category && category.title ? category.title : '';
-  }
-
-  private _filter(title: string): Category[] {
+  private _filter(title: string): string[] {
     const filterValue = title.toLowerCase();
+    return this.titles.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+}
 
-    return this.options.filter(option => option.title.toLowerCase().indexOf(filterValue) === 0);
+@Component({
+  selector: 'new-task-dialog',
+  templateUrl: './new-task-dialog.component.html'
+})
+export class NewTaskDialog {
+  constructor(
+    public dialogRef: MatDialogRef<NewTaskDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: string[]) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
-  // onNoClick(): void {
-  //   this.dialogRef.close();
-  // }
+  titles = this.data;
+
+  async sendNewTask() {
+
+  }
 }
