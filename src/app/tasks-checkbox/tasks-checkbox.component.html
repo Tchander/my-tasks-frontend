@@ -1,7 +1,18 @@
 <section class="checkbox-section">
     <li *ngFor="let todo of todos">
-      <mat-checkbox (click)="isCompleted(todo)">
-        <div style="text-decoration: line-through"> {{ todo.text }} </div>
+      <mat-checkbox (input)="isCompleted(todo)"
+                    [checked]="todo.isCompleted">
+        <div *ngIf="!todo.isCompleted; else lineThrough">
+          <div style="text-decoration: none">
+            {{ todo.text }}
+          </div>
+        </div>
+        <ng-template #lineThrough>
+          <div style="text-decoration: line-through">
+            {{ todo.text }}
+          </div>
+        </ng-template>
+
       </mat-checkbox>
     </li>
 </section>

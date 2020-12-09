@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+
 
 export interface Category {
   title: string;
@@ -21,6 +24,10 @@ export class NewTaskComponent implements OnInit {
   ];
   filteredOptions: Observable<Category[]>;
 
+  // constructor(
+  //   public dialogRef: MatDialogRef<NewTaskComponent>
+  // ) {}
+
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
@@ -39,4 +46,8 @@ export class NewTaskComponent implements OnInit {
 
     return this.options.filter(option => option.title.toLowerCase().indexOf(filterValue) === 0);
   }
+
+  // onNoClick(): void {
+  //   this.dialogRef.close();
+  // }
 }

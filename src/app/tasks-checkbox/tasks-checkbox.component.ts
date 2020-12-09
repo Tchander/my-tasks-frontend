@@ -27,13 +27,20 @@ export class TasksCheckboxComponent implements OnInit {
   }
 
   async isCompleted(todo: Todo) {
-    this.selectedTask = todo
+    this.selectedTask = {...todo}
     this.selectedTask.isCompleted = !this.selectedTask.isCompleted
     const { data } =
       await axios.patch(`/projects/1/todo/${todo.id}/`,{
         isCompleted: this.selectedTask.isCompleted
       })
-    console.log(data)
+    const index = this.todos.findIndex(t => t.id === data.id)
+    this.todos.splice(index, 1, data)
+
+    // const index = this.todos.findIndex(t => t.id === todo.id)
+    // this.todos.splice(index, 1, todo)
+    // const index = this.todos.findIndex(t => t.id === this.selectedTask.id)
+    // this.todos.splice(index, 1, this.selectedTask)
+    console.log(this.todos, data.isCompleted)
   }
 
 }
