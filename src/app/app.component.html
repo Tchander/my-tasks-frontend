@@ -2,10 +2,8 @@
   <h1>Задачи</h1>
   <button mat-icon-button>+</button>
 </header>
-<div class="tasks-cards">
-  <app-tasks-card></app-tasks-card>
-  <app-tasks-card></app-tasks-card>
-  <app-tasks-card></app-tasks-card>
+<div class="tasks-cards" *ngFor="let project of projects">
+  <app-tasks-card [project]="project"></app-tasks-card>
 </div>
 
 <app-new-task></app-new-task>

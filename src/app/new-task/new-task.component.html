@@ -1,13 +1,24 @@
 <form class="new-task">
 
   <h3>НОВАЯ ЗАДАЧА</h3>
-  <mat-form-field class="task-name">
-    <textarea matInput placeholder="Название задачи..."></textarea>
-  </mat-form-field>
+  <form class="new-tasks-fields">
 
-  <mat-form-field class="category">
-    <textarea matInput placeholder="Категория"></textarea>
-  </mat-form-field>
+    <mat-form-field class="task-name-field">
+      <textarea matInput placeholder="Название задачи..."></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="category-field">
+      <mat-label>Категория</mat-label>
+      <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.title}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+  </form>
+
 
   <button mat-button>ОТМЕНА</button>
   <button mat-button>ОК</button>

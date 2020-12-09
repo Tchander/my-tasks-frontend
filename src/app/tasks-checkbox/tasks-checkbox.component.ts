@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import axios from '../../plugins/axios';
+// import {Project} from '../tasks-card/tasks-card.component';
 
-export interface Task {
+export interface Todo {
   id: number;
-  name: string;
+  text: string;
   isCompleted: boolean;
+  // project_id: bigint;
+  project_id: number
 }
 
 @Component({
@@ -14,23 +17,20 @@ export interface Task {
 })
 export class TasksCheckboxComponent implements OnInit {
 
-  selectedTask: Task
+  selectedTask: Todo;
 
-  tasks: Task[] = [
-    { id: 1, name: '1', isCompleted: false },
-    { id: 2, name: '2', isCompleted: false }
-  ];
+  @Input() todos: Todo[];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  async isCompleted(task: Task) {
-    this.selectedTask = task
+  async isCompleted(todo: Todo) {
+    this.selectedTask = todo
     this.selectedTask.isCompleted = !this.selectedTask.isCompleted
     const { data } =
-      await axios.patch(`/projects/1/todo/${task.id}/`,{
+      await axios.patch(`/projects/1/todo/${todo.id}/`,{
         isCompleted: this.selectedTask.isCompleted
       })
     console.log(data)

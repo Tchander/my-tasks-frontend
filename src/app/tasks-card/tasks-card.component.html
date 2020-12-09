@@ -1,8 +1,8 @@
 <mat-card class="tasks-card">
   <mat-card-header>
-    <mat-card-title>Title</mat-card-title>
+    <mat-card-title>{{ project.title }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <app-tasks-checkbox></app-tasks-checkbox>
+    <app-tasks-checkbox [todos]="project.todos"></app-tasks-checkbox>
   </mat-card-content>
 </mat-card>

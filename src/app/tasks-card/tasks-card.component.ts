@@ -1,4 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+export interface Todo {
+  id: number;
+  text: string;
+  isCompleted: boolean;
+  // project_id: bigint;
+  project_id: number
+}
+
+export interface Project {
+  id: number;
+  title: string;
+  todos: Todo[];
+}
 
 @Component({
   selector: 'app-tasks-card',
@@ -8,7 +22,10 @@ import { Component, OnInit } from '@angular/core';
 export class TasksCardComponent implements OnInit {
   constructor() { }
 
+  @Input() project: Project
+
   ngOnInit(): void {
   }
+
 
 }
