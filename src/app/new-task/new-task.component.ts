@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import axios from '../../plugins/axios';
+import { Project } from '../project';
 
 @Component({
   selector: 'app-new-task',
@@ -13,12 +14,13 @@ import axios from '../../plugins/axios';
 export class NewTaskComponent implements OnInit {
   title = new FormControl('');
   text = new FormControl('');
+  newTaskArrived = new EventEmitter<Project>();
   filteredOptions: Observable<string[]>;
-  // @Output() project = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<NewTaskDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: string[]) {}
+    @Inject(MAT_DIALOG_DATA) public data: string[]) {
+  }
 
   titles = this.data;
 
@@ -40,14 +42,15 @@ export class NewTaskComponent implements OnInit {
       title: this.title.value,
       text: this.text.value
     })
-    // this.project.emit(data)
     this.onNoClick();
+    this.newTaskArrived.emit(data)
   }
 
   private _filter(title: string): string[] {
     const filterValue = title.toLowerCase();
     return this.titles.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
+
 }
 
 @Component({

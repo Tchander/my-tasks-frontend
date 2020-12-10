@@ -1,20 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import axios from '../plugins/axios';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {NewTaskComponent, NewTaskDialog} from './new-task/new-task.component';
-
-export interface Todo {
-  id: number;
-  text: string;
-  isCompleted: boolean;
-  project_id: bigint;
-}
-
-export interface Project {
-  id: number;
-  title: string;
-  todos: Todo[];
-}
+import { MatDialog } from '@angular/material/dialog';
+import { NewTaskComponent } from './new-task/new-task.component';
+import { Project } from './project'
 
 @Component({
   selector: 'app-root',
@@ -25,28 +13,32 @@ export class AppComponent implements OnInit {
   title = 'my-tasks-frontend';
   projects: Project[];
 
-  project: any;
-
-  listOfCategories(projects: Project[]) {
-    return this.projects.map(p => p.title)
+  constructor(public dialog: MatDialog) {
   }
-
-  constructor(public dialog: MatDialog) {}
 
   async ngOnInit(): Promise<void> {
     const { data } = await axios.get('/projects')
     this.projects = data
-    console.log(this.projects)
+  }
+
+  listOfCategories() {
+    return this.projects.map(p => p.title)
   }
 
   openDialog(): void {
-    this.dialog.open(NewTaskComponent, {
+    const dialogRef = this.dialog.open(NewTaskComponent, {
       width: '400px',
-      data: this.listOfCategories(this.projects)
+      data: this.listOfCategories()
     });
-    console.log(this.project)
+    dialogRef.componentInstance.newTaskArrived.subscribe((data) => {
+      const index = this.projects.findIndex(project => project.id === data.id)
+      if (index !== -1) {
+        this.projects.splice(index, 1, data)
+      } else {
+        this.projects.push(data)
+      }
+    });
   }
-
 }
 
 

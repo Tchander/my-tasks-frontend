@@ -1,12 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import axios from '../../plugins/axios';
-
-export interface Todo {
-  id: number;
-  text: string;
-  isCompleted: boolean;
-  project_id: bigint;
-}
+import { Todo } from '../project'
 
 @Component({
   selector: 'app-tasks-checkbox',
