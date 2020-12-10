@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import axios from '../plugins/axios';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NewTaskDialog } from './new-task/new-task.component';
+import {NewTaskComponent, NewTaskDialog} from './new-task/new-task.component';
 
 export interface Todo {
   id: number;
@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
   title = 'my-tasks-frontend';
   projects: Project[];
 
+  project: any;
+
   listOfCategories(projects: Project[]) {
     return this.projects.map(p => p.title)
   }
@@ -38,11 +40,13 @@ export class AppComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialog.open(NewTaskDialog, {
+    this.dialog.open(NewTaskComponent, {
       width: '400px',
       data: this.listOfCategories(this.projects)
     });
+    console.log(this.project)
   }
+
 }
 
 

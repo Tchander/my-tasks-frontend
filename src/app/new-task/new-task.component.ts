@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import axios from '../../plugins/axios';
 
 @Component({
   selector: 'app-new-task',
@@ -10,19 +11,37 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./new-task.component.css']
 })
 export class NewTaskComponent implements OnInit {
-  myControl = new FormControl();
-  @Input() titles: string[];
+  title = new FormControl('');
+  text = new FormControl('');
   filteredOptions: Observable<string[]>;
+  // @Output() project = new EventEmitter();
 
-  constructor() {}
+  constructor(
+    public dialogRef: MatDialogRef<NewTaskDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: string[]) {}
+
+  titles = this.data;
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
+    this.filteredOptions = this.title.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.title),
         map(title => title ? this._filter(title) : this.titles.slice())
       );
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  async sendNewTask() {
+    const { data } = await axios.post('/todos', {
+      title: this.title.value,
+      text: this.text.value
+    })
+    // this.project.emit(data)
+    this.onNoClick();
   }
 
   private _filter(title: string): string[] {
@@ -35,18 +54,8 @@ export class NewTaskComponent implements OnInit {
   selector: 'new-task-dialog',
   templateUrl: './new-task-dialog.component.html'
 })
+
 export class NewTaskDialog {
-  constructor(
-    public dialogRef: MatDialogRef<NewTaskDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: string[]) {}
+  constructor() {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  titles = this.data;
-
-  async sendNewTask() {
-
-  }
 }
