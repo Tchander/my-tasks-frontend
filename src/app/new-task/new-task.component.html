@@ -1,5 +1,7 @@
 <h3>НОВАЯ ЗАДАЧА</h3>
 
+<hr>
+
 <form class="new-tasks-fields">
 
   <mat-form-field class="task-name-field">
@@ -18,6 +20,8 @@
 
 </form>
 
-<button mat-button (click)="onNoClick()">ОТМЕНА</button>
-<button mat-button (click)="sendNewTask()">ОК</button>
+<div class="buttons">
+  <button class="button-nope" mat-button (click)="onNoClick()">ОТМЕНА</button>
+  <button class="button-ok" mat-button (click)="sendNewTask()">ОК</button>
+</div>
 
