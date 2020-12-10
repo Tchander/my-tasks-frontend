@@ -1,16 +1,44 @@
-header {
+/* Header */
+
+.header {
  background-color: #43BFF1;
+
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
 }
 
-header h1 {
-  color: white;
+.header-title {
+  font-size: 30px;
+  font-weight: 400;
+  color: #fff;
+  width: 150px;
+  margin: 20px auto;
+  padding: 5px;
   text-align: center;
 }
 
-header button {
-  color: white;
+
+.mat-icon-button {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 50px;
+  margin: 20px;
+  color: #fff;
+  width: 50px;
 }
+
+/* Task cards */
 
 .tasks-cards {
-
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
+
+.tasks-card {
+  min-width: 30%;
+  margin: 30px;
+}
+

@@ -1,8 +1,10 @@
 <header class="header">
-  <h1>Задачи</h1>
-  <button mat-icon-button (click)="openDialog()">+</button>
+  <h1 class="header-title">Задачи</h1>
+  <button class="mat-icon-button" mat-icon-button (click)="openDialog()">+</button>
 </header>
-<div class="tasks-cards" *ngFor="let project of projects">
-  <app-tasks-card [project]="project"></app-tasks-card>
+<div class="tasks-cards">
+  <div class="tasks-card" *ngFor="let project of projects">
+    <app-tasks-card [project]="project"></app-tasks-card>
+  </div>
 </div>
 
