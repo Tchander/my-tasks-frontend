@@ -1,12 +1,16 @@
-export interface Todo {
+import { Type } from 'class-transformer';
+
+export class Project {
+  id: number;
+  title: string;
+  @Type(() => Todo)
+  todos: Todo[];
+}
+
+export class Todo {
   id: number;
   text: string;
   isCompleted: boolean;
   project_id: bigint;
 }
 
-export interface Project {
-  id: number;
-  title: string;
-  todos: Todo[];
-}

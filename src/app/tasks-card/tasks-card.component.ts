@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Project } from '../project'
+import { Project } from '../project';
 
 @Component({
   selector: 'app-tasks-card',
@@ -10,9 +10,8 @@ export class TasksCardComponent implements OnInit {
 
   constructor() { }
 
-  @Input() project: Project
+  @Input() project: Project;
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

@@ -39,7 +39,7 @@ export class NewTaskComponent implements OnInit {
       text: this.text.value
     })
     this.onNoClick();
-    this.newTaskArrived.emit(data)
+    this.newTaskArrived.emit(data);
   }
 
   onNoClick(): void {
@@ -50,15 +50,12 @@ export class NewTaskComponent implements OnInit {
     const filterValue = title.toLowerCase();
     return this.titles.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
-
 }
 
 @Component({
   selector: 'new-task-dialog',
   templateUrl: './new-task-dialog.component.html'
 })
-
 export class NewTaskDialog {
   constructor() {}
-
 }

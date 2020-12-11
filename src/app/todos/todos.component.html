@@ -1,5 +1,5 @@
 <section class="checkbox-section">
-    <li *ngFor="let todo of todos">
+    <li *ngFor="let todo of sortTodosById(todos)">
       <mat-checkbox (input)="isCompleted(todo)"
                     [checked]="todo.isCompleted">
         <div *ngIf="!todo.isCompleted; else lineThrough">

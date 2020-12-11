@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewTaskComponent } from './new-task/new-task.component';
-import { Project } from './project'
+import { Project } from './project';
 import axios from '../plugins/axios';
 
 @Component({
@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    const { data } = await axios.get('/projects')
-    this.projects = data
+    const { data } = await axios.get('/projects');
+    this.projects = data;
   }
 
   openDialog(): void {
@@ -27,17 +27,17 @@ export class AppComponent implements OnInit {
       data: this.listOfCategories()
     });
     dialogRef.componentInstance.newTaskArrived.subscribe((data) => {
-      const index = this.projects.findIndex(project => project.id === data.id)
+      const index = this.projects.findIndex(project => project.id === data.id);
       if (index !== -1) {
-        this.projects.splice(index, 1, data)
+        this.projects.splice(index, 1, data);
       } else {
-        this.projects.push(data)
+        this.projects.push(data);
       }
     });
   }
 
   listOfCategories() {
-    return this.projects.map(p => p.title)
+    return this.projects.map(p => p.title);
   }
 }
 
