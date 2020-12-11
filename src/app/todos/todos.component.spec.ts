@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TasksCheckboxComponent } from './tasks-checkbox.component';
+import { TodosComponent } from './todos.component';
 
 describe('TasksCheckboxComponent', () => {
-  let component: TasksCheckboxComponent;
-  let fixture: ComponentFixture<TasksCheckboxComponent>;
+  let component: TodosComponent;
+  let fixture: ComponentFixture<TodosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TasksCheckboxComponent ]
+      declarations: [ TodosComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TasksCheckboxComponent);
+    fixture = TestBed.createComponent(TodosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

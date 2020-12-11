@@ -7,12 +7,12 @@ import { Project } from '../project'
   styleUrls: ['./tasks-card.component.css']
 })
 export class TasksCardComponent implements OnInit {
+
   constructor() { }
 
   @Input() project: Project
 
   ngOnInit(): void {
   }
-
 
 }

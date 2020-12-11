@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import axios from '../../plugins/axios';
 import { Todo } from '../project'
+import axios from '../../plugins/axios';
 
 @Component({
-  selector: 'app-tasks-checkbox',
-  templateUrl: './tasks-checkbox.component.html',
-  styleUrls: ['./tasks-checkbox.component.css']
+  selector: 'app-todos',
+  templateUrl: './todos.component.html',
+  styleUrls: ['./todos.component.css']
 })
-export class TasksCheckboxComponent implements OnInit {
+export class TodosComponent implements OnInit {
 
   selectedTask: Todo;
 

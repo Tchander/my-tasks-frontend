@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import axios from '../plugins/axios';
 import { MatDialog } from '@angular/material/dialog';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { Project } from './project'
+import axios from '../plugins/axios';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +21,6 @@ export class AppComponent implements OnInit {
     this.projects = data
   }
 
-  listOfCategories() {
-    return this.projects.map(p => p.title)
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(NewTaskComponent, {
       width: '400px',
@@ -38,6 +34,10 @@ export class AppComponent implements OnInit {
         this.projects.push(data)
       }
     });
+  }
+
+  listOfCategories() {
+    return this.projects.map(p => p.title)
   }
 }
 

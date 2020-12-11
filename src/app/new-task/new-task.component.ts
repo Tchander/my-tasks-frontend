@@ -3,8 +3,8 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import axios from '../../plugins/axios';
 import { Project } from '../project';
+import axios from '../../plugins/axios';
 
 @Component({
   selector: 'app-new-task',
@@ -14,8 +14,8 @@ import { Project } from '../project';
 export class NewTaskComponent implements OnInit {
   title = new FormControl('');
   text = new FormControl('');
-  newTaskArrived = new EventEmitter<Project>();
   filteredOptions: Observable<string[]>;
+  newTaskArrived = new EventEmitter<Project>();
 
   constructor(
     public dialogRef: MatDialogRef<NewTaskDialog>,
@@ -33,10 +33,6 @@ export class NewTaskComponent implements OnInit {
       );
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   async sendNewTask() {
     const { data } = await axios.post('/todos', {
       title: this.title.value,
@@ -44,6 +40,10 @@ export class NewTaskComponent implements OnInit {
     })
     this.onNoClick();
     this.newTaskArrived.emit(data)
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
   private _filter(title: string): string[] {

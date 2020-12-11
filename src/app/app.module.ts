@@ -1,16 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewTaskComponent } from './new-task/new-task.component';
+import { TasksCardComponent } from './tasks-card/tasks-card.component';
+import { TodosComponent } from './todos/todos.component';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { NewTaskComponent } from './new-task/new-task.component';
-import { TasksCardComponent } from './tasks-card/tasks-card.component';
-import { TasksCheckboxComponent } from './tasks-checkbox/tasks-checkbox.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewTaskDialog } from './new-task/new-task.component';
@@ -20,7 +21,7 @@ import { NewTaskDialog } from './new-task/new-task.component';
     AppComponent,
     NewTaskComponent,
     TasksCardComponent,
-    TasksCheckboxComponent,
+    TodosComponent,
     NewTaskDialog
   ],
   imports: [
